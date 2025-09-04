@@ -92,8 +92,21 @@ jobs:
     needs: deploy
 
     steps:
-      - name: Verify "Hello World" response
+      - name: Wait for app to start
+        run: |
+          echo "Checking availability of ${{ needs.deploy.outputs.webapp-url }}"
+          for i in {1..10}; do
+            if curl -s -o /dev/null -w "%{http_code}" "${{ needs.deploy.outputs.webapp-url }}" | grep -q "200"; then
+              echo "App is up!"
+              exit 0
+            fi
+            echo "App not ready yet, retrying in 10s..."
+            sleep 10
+          done
+          echo "App did not start in time" && exit 1
+
+      - name: Verify Hello World response
         run: |
           response=$(curl -s "${{ needs.deploy.outputs.webapp-url }}")
           echo "Response: $response"
-          echo "$response" | grep -q "Hello world" || (echo "Expected 'Hello world' in response" && exit 1)
+          echo "$response" | grep -q "Hello world" || (echo "❌ Expected 'Hello world' in response" && exit 1)
