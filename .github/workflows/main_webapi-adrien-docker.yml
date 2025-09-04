@@ -32,7 +32,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: hub.docker.com/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A79BAD75F0AB406C8B6CB75D17A7FF36 }}/r/adrienhh/webapi-demo:${{ github.sha }}
+          tags: hub.docker.com/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A79BAD75F0AB406C8B6CB75D17A7FF36 }}/adrienhh/webapi-demo:${{ github.sha }}
           file: ./Dockerfile
 
   deploy:
@@ -62,3 +62,4 @@ jobs:
           images: 'hub.docker.com/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A79BAD75F0AB406C8B6CB75D17A7FF36 }}/r/adrienhh/webapi-demo:${{ github.sha }}'
 
           
+
