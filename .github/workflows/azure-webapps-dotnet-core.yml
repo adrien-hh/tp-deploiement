@@ -96,9 +96,9 @@ jobs:
     steps:
       - name: Wait for app to start
         run: |
-          echo "Checking availability of ${{ deploy.outputs.webapp-url }}"
+          echo "Checking availability of https://webapi-adrien.azurewebsites.net/"
           for i in {1..10}; do
-            if curl -s -o /dev/null -w "%{http_code}" "${{ needs.deploy.outputs.webapp-url }}" | grep -q "200"; then
+            if curl -s -o /dev/null -w "%{http_code}" "https://webapi-adrien.azurewebsites.net/" | grep -q "200"; then
               echo "App is up!"
               exit 0
             fi
@@ -109,6 +109,6 @@ jobs:
 
       - name: Verify Hello World response
         run: |
-          response=$(curl -s "${{ needs.deploy.outputs.webapp-url }}")
+          response=$(curl -s "https://webapi-adrien.azurewebsites.net/")
           echo "Response: $response"
           echo "$response" | grep -q "Hello World!" || (echo "❌ Expected 'Hello world' in response" && exit 1)
