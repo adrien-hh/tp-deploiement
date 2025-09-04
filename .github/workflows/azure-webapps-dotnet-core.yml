@@ -111,4 +111,4 @@ jobs:
         run: |
           response=$(curl -s "${{ needs.deploy.outputs.webapp-url }}")
           echo "Response: $response"
-          echo "$response" | grep -q "Hello world" || (echo "❌ Expected 'Hello world' in response" && exit 1)
+          echo "$response" | grep -q "Hello World!" || (echo "❌ Expected 'Hello world' in response" && exit 1)
