@@ -9,7 +9,7 @@ namespace TestProject
 
 			// Arrange
 			int input = 2;
-			int inputSecond = 2;
+			int inputSecond = 1;
 
 			int result = input + inputSecond;
 
