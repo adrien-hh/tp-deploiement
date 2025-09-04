@@ -83,7 +83,8 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Execute tests
-        run: dotnet test Tests/TestProject/TestProject.csproj --verbosity normal
+        # run: dotnet test Tests/TestProject/TestProject.csproj --verbosity normal
+        run: dotnet test --no-build
 
   deploy:
     permissions:
