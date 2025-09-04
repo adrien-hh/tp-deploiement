@@ -96,7 +96,7 @@ jobs:
     steps:
       - name: Wait for app to start
         run: |
-          echo "Checking availability of ${{ needs.deploy.outputs.webapp-url }}"
+          echo "Checking availability of ${{ deploy.outputs.webapp-url }}"
           for i in {1..10}; do
             if curl -s -o /dev/null -w "%{http_code}" "${{ needs.deploy.outputs.webapp-url }}" | grep -q "200"; then
               echo "App is up!"
