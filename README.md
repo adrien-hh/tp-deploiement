@@ -1,4 +1,6 @@
-﻿# 🧪 TP – Déploiement CI/CD d'une Web API .NET 8 sur Azure
+[![Build and Push Docker image](https://github.com/adrien-hh/tp-deploiement/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/adrien-hh/tp-deploiement/actions/workflows/docker-publish.yml)
+
+# 🧪 TP – Déploiement CI/CD d'une Web API .NET 8 sur Azure
 
 ## 🎯 Objectif
 
