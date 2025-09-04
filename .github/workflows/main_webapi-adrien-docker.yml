@@ -24,7 +24,6 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v2
         with:
-          registry: hub.docker.com/
           username: ${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A79BAD75F0AB406C8B6CB75D17A7FF36 }}
           password: ${{ secrets.AZUREAPPSERVICE_CONTAINERPASSWORD_8A2722E547374118B744617134E16787 }}
 
@@ -61,4 +60,5 @@ jobs:
           app-name: 'webapi-adrien-docker'
           slot-name: 'Production'
           images: 'hub.docker.com/${{ secrets.AZUREAPPSERVICE_CONTAINERUSERNAME_A79BAD75F0AB406C8B6CB75D17A7FF36 }}/r/adrienhh/webapi-demo:${{ github.sha }}'
+
           
