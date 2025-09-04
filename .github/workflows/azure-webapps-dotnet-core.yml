@@ -82,11 +82,8 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Build tests only
-        run: dotnet build Tests/TestProject/TestProject.csproj --configuration Release
-
       - name: Run tests
-        run: dotnet test Tests/TestProject/TestProject.csproj --no-build
+        run: dotnet test Tests/TestProject/TestProject.csproj
 
   deploy:
     permissions:
