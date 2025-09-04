@@ -23,7 +23,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Run tests
-      run: dotnet test Tests/TestProject/TestProject.csproj
+      run: dotnet test
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
