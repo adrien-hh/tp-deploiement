@@ -71,9 +71,9 @@ jobs:
     needs: build
     environment:
       name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy.outputs.webapp-url }}
     outputs:
-      webapp-url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      webapp-url: ${{ steps.deploy.outputs.webapp-url }}
 
     steps:
       - name: Download artifact from build job
@@ -98,7 +98,7 @@ jobs:
         run: |
           echo "Checking availability of ${{ needs.deploy.outputs.webapp-url }}"
           for i in {1..10}; do
-            if curl -s -o /dev/null -w "%{http_code}" "https://webapi-adrien.azurewebsites.net/" | grep -q "200"; then
+            if curl -s -o /dev/null -w "%{http_code}" "${{ needs.deploy.outputs.webapp-url }}" | grep -q "200"; then
               echo "App is up!"
               exit 0
             fi
@@ -109,6 +109,6 @@ jobs:
 
       - name: Verify Hello World response
         run: |
-          response=$(curl -s "https://webapi-adrien.azurewebsites.net/")
+          response=$(curl -s "${{ needs.deploy.outputs.webapp-url }}")
           echo "Response: $response"
-          echo "$response" | grep -q "Hello World!" || (echo "❌ Expected 'Hello world' in response" && exit 1)
+          echo "$response" | grep -q "Hello World!" || (echo "Expected 'Hello world' in response" && exit 1)
