@@ -56,7 +56,7 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            APP_URL=$(az webapp show --name MyAppService --resource-group MyResourceGroup --query defaultHostName -o tsv)
+            APP_URL=$(az webapp show --name webapi-adrien-docker --resource-group cours_DevOps --query defaultHostName -o tsv)
             echo "APP_URL=https://$APP_URL" >> $GITHUB_ENV
       
       - name: Check app disponibility
