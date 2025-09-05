@@ -40,6 +40,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     needs: build-test-push
+    permissions:
+      id-token: write
 
     steps:
       - name: Azure CLI Login
