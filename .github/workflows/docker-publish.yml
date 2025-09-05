@@ -42,9 +42,23 @@ jobs:
     needs: build-test-push
 
     steps:
+      - name: Azure CLI Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            APP_URL=$(az webapp show --name MyAppService --resource-group MyResourceGroup --query defaultHostName -o tsv)
+            echo "APP_URL=https://$APP_URL" >> $GITHUB_ENV
+      
       - name: Check app disponibility
         run: |
-          APP_URL="${{ secrets.APP_URL }}"
           echo "Checking availability of $APP_URL"
           for i in {1..10}; do
             if curl -s -o /dev/null -w "%{http_code}" "$APP_URL" | grep -q "200"; then
@@ -57,7 +71,6 @@ jobs:
 
       - name: Check Hello World response
         run: |
-          APP_URL="${{ secrets.APP_URL }}"
           response=$(curl -s "$APP_URL")
           echo "Response: $response"
           echo "$response" | grep -q "Hello World!" || (echo "Expected 'Hello World!' in response" && exit 1)
